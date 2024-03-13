@@ -9,6 +9,37 @@ public class KClosestPointsToOrigin_973 {
         System.out.println(new KClosestPointsToOrigin_973().kClosest(points, 2));
     }
 
+    public int[][] kClosestMaxHeap(int[][] points, int k) {
+        // add points to the priority Queue and sort based on distance from origin
+        PriorityQueue<int[]> maxHeap = new PriorityQueue<>( (p2, p1) ->
+                calculateDistanceFromOrigin(p1[0],p1[1]) - calculateDistanceFromOrigin(p2[0],p2[1]));
+        int[][] result = new int[k][2];
+        for(int[] n : points) {
+            maxHeap.add(n);
+            if(maxHeap.size() > k) {
+                maxHeap.remove();
+            }
+        }
+
+        for(int i = 0 ; i < k ; i++) {
+            result[i] = maxHeap.remove();
+        }
+        return result;
+    }
+    public int[][] kClosestMinHeap(int[][] points, int k) {
+        // add points to the priority Queue and sort based on distance from origin
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>( (p1, p2) ->
+                calculateDistanceFromOrigin(p1[0],p1[1]) - calculateDistanceFromOrigin(p2[0],p2[1]));
+        int[][] result = new int[k][2];
+        for(int[] n : points) {
+            minHeap.add(n);
+        }
+
+        for(int i = 0 ; i < k ; i++) {
+            result[i] = minHeap.remove();
+        }
+        return result;
+    }
     public int[][] kClosest(int[][] points, int k) {
         // add points to the priority Queue and sort based on distance from origin
         PriorityQueue<int[]> minHeap = new PriorityQueue<>( (p1, p2) ->
