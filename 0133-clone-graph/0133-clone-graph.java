@@ -46,27 +46,5 @@ class Solution {
         return copy;
     }
 
-    public Node cloneGraph1(Node node) {
-        Map<Node, Node> lookup = new HashMap<>();
-        if (node == null)
-            return node;
-        return traverse(node, lookup);
-    }
-
-    private Node traverse(Node node, Map<Node, Node> lookup) {
-        //create a copy of node
-        Node copy = new Node(node.val);
-        lookup.put(node, copy);
-        for (Node neighbor : node.neighbors) {
-            if (lookup.containsKey(neighbor)) {
-                copy.neighbors.add(lookup.get(neighbor));
-            } else {
-                Node neighborCopy = traverse(neighbor, lookup);
-                copy.neighbors.add(neighborCopy);
-            }
-        }
-
-        return copy;
-
-    }
+    
 }
