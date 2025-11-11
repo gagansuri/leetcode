@@ -9,44 +9,26 @@
  */
 class Solution {
     
-    private TreeNode result;
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        findLCA(root, p,q);
-        return result;
-    }
-
-    private boolean findLCA(TreeNode root, TreeNode p, TreeNode q) {
-        if(root == null) return false;
-        boolean left = findLCA(root.left, p, q);
-        boolean right = findLCA(root.right, p, q);
-        boolean current = (root == p || root == q);
-
-        if((left && right) || (left && current) || (right && current)) {
-            result = root;
-        }
-        return left || right || current; 
+    private TreeNode result = null;
+    
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q){
+         lowestCommonAncestorR(root, p, q);
+         return result;
     }
     
-    public TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
-        //postorder traversal
-        // if root == null return
-        /// if root  is equal to p or q , return root
-        // go to left 
-        // go to right
-        // if both left are right are not null that is LCA
+    public boolean lowestCommonAncestorR(TreeNode root, TreeNode p, TreeNode q){
+        if(root == null) return false;
 
-        if(root == null) return root;
+        //post order
+        boolean left = lowestCommonAncestorR(root.left, p , q);
+        boolean right = lowestCommonAncestorR(root.right, p, q);
 
-        if(root == p || root == q) return root;
+        boolean curr = (root == p || root == q) ? true : false;
 
-        TreeNode left = lowestCommonAncestor(root.left,  p,  q);
-        TreeNode right = lowestCommonAncestor(root.right,  p,  q);
+        if((left && right) || (left && curr) || (curr && right)) result  = root;
 
-        if(left !=null && right != null) return root; 
+        return left || right || curr;
 
-        if(left != null) return left;
-
-        if(right != null) return right;
-        return null;
     }
 }
+   
