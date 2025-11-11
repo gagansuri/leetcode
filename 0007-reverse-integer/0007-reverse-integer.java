@@ -8,7 +8,7 @@ class Solution {
         int rem = x%10;
         x = x / 10;
         sum = sum*10 + rem;
-        if( result > Integer.MAX_VALUE || result < Integer.MIN_VALUE) return 0;
+        if( sum > Integer.MAX_VALUE || sum < Integer.MIN_VALUE) return 0;
      }
 
      return (int)sum;   
