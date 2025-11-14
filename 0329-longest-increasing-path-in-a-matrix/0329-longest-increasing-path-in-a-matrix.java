@@ -31,10 +31,10 @@ class Solution {
         int top = (i > 0 && matrix[i][j] < matrix[i-1][j])   ? dfs(matrix, i - 1, j , visited) : 0 ;
         int bottom = (i < matrix.length - 1 && matrix[i][j] < matrix[i+1][j]) ? dfs(matrix, i + 1, j, visited) : 0 ;
         
-        System.out.println("i: "+ i + " j : " + j +"left :"+ left + " right :"+right +" top: "+ top +" bottom : "+ bottom);
+        //System.out.println("i: "+ i + " j : " + j +"left :"+ left + " right :"+right +" top: "+ top +" bottom : "+ bottom);
         p = Math.max(p,(Math.max(left,Math.max(right,Math.max(top,bottom)))));
         visited[i][j] = p + 1;
-        System.out.println("p :"+ p + " visited[i][j] :" + visited[i][j]);
+        //System.out.println("p :"+ p + " visited[i][j] :" + visited[i][j]);
         return p + 1;
 
     }
