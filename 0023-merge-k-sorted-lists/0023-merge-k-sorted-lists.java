@@ -10,53 +10,44 @@
  */
 class Solution {
     public ListNode mergeKLists(ListNode[] lists) {
-     // merging 2 lists
-     // option is mergin2 list and then next and so on 
-     // N elements in the list - and there are M lists
-     // merging will happen in MN time
-     if(lists == null || lists.length == 0) return null;
-     return mergeKLists(lists, 0 , lists.length - 1);   
+        if(lists == null || lists.length == 0) return null;
+        return mergeKLists(lists, 0 , lists.length - 1);
     }
 
     public ListNode mergeKLists(ListNode[] lists, int start, int end) {
-     // merging 2 lists
-     // option is mergin2 list and then next and so on 
-     // N elements in the list - and there are M lists
-     // merging will happen in MN time
-       
+        
         if(start == end) return lists[start];
+
         int mid = start + (end - start)/2;
-        ListNode left = mergeKLists(lists, start, mid); // mid not included
+        ListNode left = mergeKLists(lists, start, mid);    
         ListNode right = mergeKLists(lists, mid + 1, end);
-        return  merge2Lists(left, right);
-}
-
-public ListNode merge2Lists(ListNode l1, ListNode l2) {
-    ListNode root = new ListNode();
-    ListNode dummy = root;
-    while(l1 != null && l2 != null) {
-        if(l1.val < l2.val) {
-           ListNode t = new ListNode(l1.val);
-           dummy.next = t;
-           dummy = dummy.next; 
-           l1 = l1.next;    
-        } else {
-            ListNode t = new ListNode(l2.val);
-            dummy.next = t;
-            dummy = dummy.next;
-            l2 = l2.next;
+        return merge2Lists(left, right);
         }
-    }
 
-    if(l1 != null) {
-        dummy.next = l1;
-    }
+    private ListNode merge2Lists(ListNode n1, ListNode n2) {
+        ListNode head = new ListNode(-1);
+        ListNode dummy = head;
+        while(n1 !=null && n2 !=null) {
+            if(n1.val < n2.val) {
+                ListNode temp = new ListNode(n1.val);
+                head.next = temp;
+                head = temp;
+                n1 = n1.next;    
+            } else {
+                ListNode temp = new ListNode(n2.val);
+                head.next = temp;
+                head = temp;
+                n2 = n2.next;
+            }
 
-    
-    if(l2 != null) {
-        dummy.next = l2;
-    }
+        }
+        if(n1 != null) {
+            head.next = n1;
+        }
+        if(n2 != null) {
+            head.next = n2;
+        }
 
-    return root.next;
-}
+    return dummy.next;
+    }
 }
