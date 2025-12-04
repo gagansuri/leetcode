@@ -5,9 +5,12 @@ class TimeMap {
     }
     
     public void set(String key, String value, int timestamp) {
-        map.putIfAbsent(key, new TreeMap<>());
+        if(!map.containsKey(key)) map.put(key, new TreeMap<>());
+        
         TreeMap<Integer,String> innerMap = map.get(key);
         innerMap.put(timestamp, value);
+        //map.put(key, innerMap);
+       // System.out.println(" set:" + map);
     }
     
     public String get(String key, int timestamp) {
