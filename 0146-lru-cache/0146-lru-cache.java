@@ -1,74 +1,70 @@
 class LRUCache {
     // implement using double linked list and a hashmap
+    private Map<Integer, Node> map;
+    private int capacity;
+    private Node head;
+    private Node tail;
 
     class Node{
-        int key;
         int value;
+        int key;
         Node pre;
         Node next;
         Node(int key, int value) {
             this.key = key;
             this.value = value;
         }
-
     }
-    private Map<Integer, Node> map;
-    private int capacity;
-    private Node head;
-    private Node tail;
+
    
     public LRUCache(int _capacity) {
         this.capacity = _capacity;
         map = new HashMap<>();
-        head = new Node(-1, -1);
+        head = new Node(-1,-1);
         tail = new Node(-1,-1);
         head.next = tail;
         tail.pre = head;
     }
     
-    public int get(int key) {
-        if(!map.containsKey(key)) return -1;
-
-        Node node = map.get(key);
-        // for LRU remove and add
-        remove(node);
-        add(node);
-        return node.value;
-
-    }
     
-    public void put(int key, int val) {
+    public void put(int key, int value) {
         if(map.containsKey(key)) {
-            Node node = map.get(key);
+            Node node = map.remove(key);
             remove(node);
-            map.remove(key);
-        }    
-
-        Node node = new Node(key,val);
+        }
+        Node node = new Node(key, value);
         add(node);
         map.put(key,node);
-        if(map.size() > this.capacity) {
-            Node first = head.next;
-            remove(first);
-            map.remove(first.key);
+        if(map.size() > capacity) {
+            Node nodeToDelete = head.next;
+            remove(nodeToDelete);
+            map.remove(nodeToDelete.key);
         }
     }
     
+    public int get(int key) {
+       if(!map.containsKey(key)) return -1;
+
+       Node node = map.get(key);
+       remove(node);
+       add(node);
+       return node.value;
+    }
     
    
 
     void add(Node node) {
-        // add at the tail
-        Node previous = tail.pre;
-        tail.pre = node;
-        node.next = tail;
-        node.pre = previous;
-        previous.next = node;
+       Node pre = tail.pre;
+       tail.pre = node;
+       node.next = tail;
+       node.pre = pre;
+       pre.next = node;
     }
 
     void remove(Node node) {
-        node.pre.next = node.next;
-        node.next.pre = node.pre; 
+       node.pre.next = node.next;
+       node.next.pre = node.pre;
+
         
     }
 
