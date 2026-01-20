@@ -7,17 +7,20 @@ class MedianFinder {
     
     public void addNum(int num) {
         minHeap.add(num);
-        if((minHeap.size() - maxHeap.size()) > 1) {
-            int n = minHeap.remove();
-            maxHeap.add(n);
+        maxHeap.add(minHeap.peek());
+        minHeap.remove();
+
+        if(minHeap.size() < maxHeap.size()) {
+            minHeap.add(maxHeap.peek());
+            maxHeap.remove();
         }
     }
     
     public double findMedian() {
-        if(minHeap.size() == maxHeap.size()) {
-            return (minHeap.peek() + maxHeap.peek() ) / 2.0;
+        if(minHeap.size() > maxHeap.size()) {
+            return minHeap.peek();
         }
-        return minHeap.peek();
+        return (maxHeap.peek() + minHeap.peek())*0.5;
     }
 }
 
