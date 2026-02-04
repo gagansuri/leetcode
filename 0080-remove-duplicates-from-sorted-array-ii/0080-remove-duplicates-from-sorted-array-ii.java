@@ -4,10 +4,10 @@ class Solution {
        for(int i = 1 ; i < nums.length ; i++) {
         if(nums[i] == nums[i-1]) {
             count++;
-            if(count > 1) {
-                continue;
-            } else {
+            if(count <= 1) {
                 nums[index++] = nums[i];
+            } else { 
+                
             }
         } else {
             count = 0;
