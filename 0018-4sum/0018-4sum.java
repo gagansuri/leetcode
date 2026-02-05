@@ -6,7 +6,10 @@ class Solution {
             for(int j = i + 1 ; j < nums.length - 2 ; j++) {
                 int left = j + 1, right = nums.length - 1;
                     while(left < right) {
-                        long sum = nums[i] + nums[j] + nums[left] + nums[right];
+                        long sum = nums[i];
+                        sum += nums[j];
+                        sum += nums[left];
+                        sum += nums[right];
                         if(sum == target) {
                             res.add(List.of(nums[i], nums[j], nums[left++] , nums[right--]));    
                         } else if(sum > target) {
