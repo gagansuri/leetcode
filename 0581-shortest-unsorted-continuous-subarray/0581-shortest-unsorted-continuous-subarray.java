@@ -5,12 +5,15 @@ class Solution {
         int left = 0, right = nums.length - 1;
 
         while(left < right) {
-            if(nums[left] != numsC[left] && nums[right] != numsC[right]) {
-                return right - left + 1;
-            } 
+            if(nums[left] == numsC[left] ) {
+                left++;
+            } else if(nums[right] == numsC[right]) {
+                right--;
+            } else {
+                    return right - left + 1;
+            }
 
-            left++; right--;
-
+            
         } 
     return 0;
         
