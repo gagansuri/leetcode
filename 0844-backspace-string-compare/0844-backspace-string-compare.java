@@ -19,11 +19,12 @@ class Solution {
             }
         }
 
-        StringBuilder sbS = new StringBuilder();
-        StringBuilder tbS = new StringBuilder();
-        while(!sStack.isEmpty()) sbS.append(sStack.pop());
-        while(!tStack.isEmpty()) tbS.append(tStack.pop());
-        System.out.println( " s : " + sbS + " t :" + tbS);
-        return sbS.toString().equals(tbS.toString());
+        if(sStack.size() != tStack.size()) return false;
+
+        while(!sStack.isEmpty())  {
+            if(sStack.pop() != tStack.pop()) return false;
+        }
+        
+        return true;
     }
 }
