@@ -25,6 +25,6 @@ class Solution {
             return false;
         }
     }
-        return lookup.size() == 0 ? true : false;
+        return  lookup.isEmpty();
     }
 }
