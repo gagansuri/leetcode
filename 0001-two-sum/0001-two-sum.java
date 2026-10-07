@@ -8,6 +8,6 @@ class Solution {
                 lookup.put(nums[i], i);
             }
         }
-        return null;
+        throw new IllegalArgumentException("No valid indices found");
     }
 }
