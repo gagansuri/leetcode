@@ -9,15 +9,9 @@ class Solution {
             char[] s1 = s.toCharArray();
             Arrays.sort(s1);
             String t = new String(s1);
-            if(!lookup.containsKey(t)) {
-                List<String> values = new ArrayList<>();
-                values.add(s);
-                lookup.put(t,values);
-            } else {
-                lookup.get(t).add(s);
-            }
+            lookup.putIfAbsent(t, new ArrayList<>());
+            lookup.get(t).add(s);
         }
-
         return new ArrayList<>(lookup.values());
     }
 }
